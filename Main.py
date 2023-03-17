@@ -2,7 +2,7 @@ import Image
 import video
 import dir
 
-Image.readVideo("clip.mp4", "Unedited")
+Image.readVideo("4seconds.mp4", "Unedited")
 try:
     Image.drawBox("Unedited", "Edited")
 except Exception as e:

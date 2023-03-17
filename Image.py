@@ -29,7 +29,8 @@ def readVideo(path, folderName):
   
   # Release the video capture object
   vid_capture.release()
-
+p1color = (255,0,0)
+p2color = (0,0,255)
 def drawBox(pastFolder, newFolder):
     dir.makeDir(newFolder)
     z = 0
@@ -47,8 +48,16 @@ def drawBox(pastFolder, newFolder):
             pointA = (a,c)
             pointB = (b,d)
             cv2.rectangle(image, pointA, pointB, (255,255,0), thickness = 3, lineType = cv2.LINE_AA)
-            otherImage = cv2.circle(otherImage, ((a+b)//2, d), 20, (225,0,0), -1)
-
+            if (i %2 == 0):
+               p1Cords = [a,b,c,d]
+            else:
+               p2Cords = [a,b,c,d]
+        if (p1Cords[2] > p2Cords[2]):
+           otherImage = cv2.circle(otherImage, ((p1Cords[0]+p1Cords[1])//2, p1Cords[3]), 20, p1color, -1)
+           otherImage = cv2.circle(otherImage, ((p2Cords[0]+p2Cords[1])//2, p2Cords[3]), 20, p2color, -1)
+        else:
+           otherImage = cv2.circle(otherImage, ((p1Cords[0]+p1Cords[1])//2, p1Cords[3]), 20, p2color, -1)
+           otherImage = cv2.circle(otherImage, ((p2Cords[0]+p2Cords[1])//2, p2Cords[3]), 20, p1color, -1)
         height, width, channels = image.shape
         newImage = np.zeros((2*height,width,channels), np.uint8)
         newImage[0:otherImage.shape[0], 0:otherImage.shape[1]] = otherImage
