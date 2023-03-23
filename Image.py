@@ -10,6 +10,7 @@ def readVideo(path, folderName):
   dir.makeDir(folderName)
 
   i = 0
+  write = True
 
   while(vid_capture.isOpened()):
     # vid_capture.read() methods returns a tuple, first element is a bool 
@@ -20,10 +21,10 @@ def readVideo(path, folderName):
       #cv2.imshow('Frame',frame)
       # 20 is in milliseconds, try to increase the value, say 50 and observe
       #key = cv2.waitKey(100)
-
-      cv2.imwrite(f'{folderName}\\Original{i}.jpg', frame)
-      i += 1
-
+      if(write == True):
+        cv2.imwrite(f'{folderName}\\Original{i}.jpg', frame)
+        i += 1
+      write = not write
     else:
       break
   

@@ -1,0 +1,4 @@
+make it so boxes are only drawn on players
+make outline of court more stable
+make it work with all videos (even if it is moving or the color is weird)
+make the video making process faster

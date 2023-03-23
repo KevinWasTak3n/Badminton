@@ -17,7 +17,7 @@ def makeVideo():
   height, width, layers = frame.shape
 
   fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-  video = cv2.VideoWriter(video_name, fourcc, 30, (width,height))
+  video = cv2.VideoWriter(video_name, fourcc, 15, (width,height))
 
   for image in images:
       video.write(image)
