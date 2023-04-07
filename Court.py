@@ -5,8 +5,16 @@ import imutils
 # global corners
 # found = False
 # corners = 0
+
+found = False
+corners = 0
 def drawCourt(image):
-    corners = findCorners(image)
+    global found
+    global corners
+    if not found:
+        corners = findCorners(image)
+        # found = True #uncomment to only find court in first frame
+        corners = findCorners(image)
     height, width, channels = image.shape
     otherImage = np.zeros((height,width,channels), np.uint8)
     image = cv2.polylines(image, corners, True, (0,255,0), 5, cv2.LINE_AA)

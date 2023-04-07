@@ -1,12 +1,13 @@
 import os
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
+from Main import changeVideo
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+# UPLOAD_FOLDER = '/uploads'
+ALLOWED_EXTENSIONS = {'mp4', 'avi'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -27,8 +28,12 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('download_file', name=filename))
+            file.save(filename)
+            changeVideo(filename)
+            # return send_file(file, mimetype='video')
+            # return redirect(url_for('upload_file', name=filename))
+            return send_file('video.avi')
+        
     return '''
     <!doctype html>
     <title>Upload new File</title>
@@ -40,15 +45,3 @@ def upload_file():
     '''
 
 app.run(host='0.0.0.0')
-
-# from flask import Flask
-# from flask import send_file
-# import random
-
-# app = Flask(__name__)
-
-# @app.route('/')
-# def hello_world():
-#     return send_file("b.jpg", mimetype='image')
-
-# app.run(host='0.0.0.0')

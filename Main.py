@@ -1,18 +1,22 @@
 import Image
 import video
 import dir
+import os
 
-Image.readVideo("clip 6.mp4", "Unedited")
-try:
-    Image.drawBox("Unedited", "Edited")
-except Exception as e:
-    print(e)
+def changeVideo(fileName):
 
-try:
-    video.makeVideo()
-except Exception as e:
-    print(e)
+    Image.readVideo(fileName, "Unedited")
+    try:
+        Image.drawBox("Unedited", "Edited")
+    except Exception as e:
+        print(e)
 
-dir.removeDir("Unedited")
-dir.removeDir("Edited")
+    try:
+        video.makeVideo()
+    except Exception as e:
+        print(e)
+
+    dir.removeDir("Unedited")
+    dir.removeDir("Edited")
+    os.remove(fileName)
 
