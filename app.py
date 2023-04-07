@@ -36,12 +36,16 @@ def upload_file():
         
     return '''
     <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
+    <title>Badminton Video Ai Analyser</title>
+    <h1>Badminton Video Ai Analyser By Kevin</h1>
+    <h2>Upload a Badminton Video</h2>
     <form method=post enctype=multipart/form-data>
       <input type=file name=file>
       <input type=submit value=Upload>
     </form>
+    <p>After uploading a video, this program will automatically analyze and edit the video before downloading to your computer</p>
+    <p>Warning: longer videos may take multiple minutes to process</p>
+    <p>Tip: short stationary videos with badminton as the focus will work best</p>
     '''
 
 app.run(host='0.0.0.0')
